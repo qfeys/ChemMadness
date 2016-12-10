@@ -47,16 +47,79 @@ namespace Assets.Scripts.Chemical
 
         internal void React(float dT)
         {
-            foreach (Reaction r in AllReactions)
+            foreach (Reaction reaction in AllReactions)
             {
-                if(r.reagens.All(n => products.Any(p => p.Key.Name.Equals(n.name)))             // all reagents are present
-                    && pressure >= r.pMin && temperature >= r.Tmin && temperature <= r.Tmax)    // conditions are met
+                if(reaction.reagens.All(n => products.Any(p => p.Key.Name.Equals(n.name)))             // all reagents are present
+                    && pressure >= reaction.pMin && temperature >= reaction.Tmin && temperature <= reaction.Tmax)    // conditions are met
                 {
                     Debug.Log("Reaction Happens!");
-                    float stoichMod = r.reagens.Min(p => p.ratio / products[Product.Find(p.name)]) / r.reagens.Sum(p => p.ratio);
-                    if (stoichMod > 1) throw new Exception("Check this out!");
-                    // temp & press mod
-                    //float reactionSize
+                    // Find critical product, aka the product with the smallest relative 
+                    // fraction, aka it's fraction corrected by the reaction ratio
+                    ProdRatio critProd = new ProdRatio();
+                    List<ProdRatio> normilizedReagensRatios = new List<ProdRatio>();
+                    float ReagensSum = reaction.reagens.Sum(rr => rr.ratio);
+                    foreach(var r in reaction.reagens)
+                    {
+                        normilizedReagensRatios.Add(new ProdRatio(r.name, r.ratio / ReagensSum));
+                    }
+                    foreach (var newProduct in normilizedReagensRatios)
+                    {
+                        if (critProd.name == null)
+                        {
+                            critProd = newProduct;
+                        }
+                        else
+                        {
+                            float critProtRelativeFraction = products[Product.Find(critProd.name)] / critProd.ratio;
+                            float newProdRelativeFraction = products[Product.Find(newProduct.name)] / newProduct.ratio;
+                            if (newProdRelativeFraction < critProtRelativeFraction)
+                                critProd = newProduct;
+                        }
+                    }
+                    Debug.Log("Critical product is: " + critProd.name);
+
+                    // There are 3 components that adjust the reactionspeed:
+                    // 1) If the critical product is only lesser present, the reaction will be slower then if it was fully present
+                    //      This is implemented as the relative fraction
+                    // 2) If there are other product present, the reactionspeed will slow down due to the interference of the other products
+                    //      This is implemented as the product of all deficiancies.
+                    // 3) At elevated temperatures, the reactionspeed is higher
+                    float relativeFraction = products[Product.Find(critProd.name)] / critProd.ratio;
+                    float productOfDeficianties = 1;
+                    foreach(var p in normilizedReagensRatios)
+                    {
+                        productOfDeficianties *= Mathf.Pow(products[Product.Find(p.name)] / p.ratio, p.ratio);
+                    }
+                    float changeByT = 1;
+                    Debug.Log("TimeEffect: " + relativeFraction + ":" + productOfDeficianties + ":" + changeByT);
+                    float ModifiedReactionTime = reaction.reactionTime * relativeFraction * productOfDeficianties * changeByT;
+
+                    // Create new product and remove the old product
+                    // 1) removal of reagens
+                    foreach(var r in normilizedReagensRatios)
+                    {
+                        products[Product.Find(r.name)] -= r.ratio * dT;
+                    }
+                    // 2) creation of new product
+                    List<ProdRatio> normilizedProductRatios = new List<ProdRatio>();
+                    float ProductsSum = reaction.reagens.Sum(rr => rr.ratio);
+                    foreach (var p in reaction.product)
+                    {
+                        normilizedProductRatios.Add(new ProdRatio(p.name, p.ratio / ReagensSum));
+                    }
+                    foreach (var p in normilizedProductRatios)
+                    {
+                        if (products.ContainsKey(Product.Find(p.name)))
+                            products[Product.Find(p.name)] += p.ratio * dT;
+                        else
+                            products.Add(Product.Find(p.name), p.ratio * dT);
+                    }
+                    // remove products that no longer exist from the list
+                    foreach (var r in normilizedReagensRatios)
+                    {
+                        if (products[Product.Find(r.name)] <= 0)
+                            products.Remove(Product.Find(r.name));
+                    }
                 }
             }
         }
