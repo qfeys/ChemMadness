@@ -52,7 +52,12 @@ namespace Assets.Scripts.Chemical
                 if(reaction.reagens.All(n => products.Any(p => p.Key.Name.Equals(n.name)))             // all reagents are present
                     && pressure >= reaction.pMin && temperature >= reaction.Tmin && temperature <= reaction.Tmax)    // conditions are met
                 {
-                    Debug.Log("Reaction Happens!");
+                    string log = "Reaction Happens! ";
+                    foreach(var p in products)
+                    {
+                        log += ":" + p.Key.Name + ": " + p.Value;
+                    }
+                    Debug.Log(log);
                     // Find critical product, aka the product with the smallest relative 
                     // fraction, aka it's fraction corrected by the reaction ratio
                     ProdRatio critProd = new ProdRatio();
@@ -76,7 +81,6 @@ namespace Assets.Scripts.Chemical
                                 critProd = newProduct;
                         }
                     }
-                    Debug.Log("Critical product is: " + critProd.name);
 
                     // There are 3 components that adjust the reactionspeed:
                     // 1) If the critical product is only lesser present, the reaction will be slower then if it was fully present
@@ -91,14 +95,15 @@ namespace Assets.Scripts.Chemical
                         productOfDeficianties *= Mathf.Pow(products[Product.Find(p.name)] / p.ratio, p.ratio);
                     }
                     float changeByT = 1;
-                    Debug.Log("TimeEffect: " + relativeFraction + ":" + productOfDeficianties + ":" + changeByT);
-                    float ModifiedReactionTime = reaction.reactionTime * relativeFraction * productOfDeficianties * changeByT;
+
+                    float ModifiedReactionTime = reaction.reactionTime / (relativeFraction * productOfDeficianties * changeByT);
+                    Debug.Log("ReactionSpeed: " + ModifiedReactionTime);
 
                     // Create new product and remove the old product
                     // 1) removal of reagens
                     foreach(var r in normilizedReagensRatios)
                     {
-                        products[Product.Find(r.name)] -= r.ratio * dT;
+                        products[Product.Find(r.name)] -= r.ratio * dT / ModifiedReactionTime;
                     }
                     // 2) creation of new product
                     List<ProdRatio> normilizedProductRatios = new List<ProdRatio>();
@@ -110,9 +115,9 @@ namespace Assets.Scripts.Chemical
                     foreach (var p in normilizedProductRatios)
                     {
                         if (products.ContainsKey(Product.Find(p.name)))
-                            products[Product.Find(p.name)] += p.ratio * dT;
+                            products[Product.Find(p.name)] += p.ratio * dT / ModifiedReactionTime;
                         else
-                            products.Add(Product.Find(p.name), p.ratio * dT);
+                            products.Add(Product.Find(p.name), p.ratio * dT / ModifiedReactionTime);
                     }
                     // remove products that no longer exist from the list
                     foreach (var r in normilizedReagensRatios)
