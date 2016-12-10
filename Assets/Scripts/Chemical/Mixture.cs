@@ -11,14 +11,22 @@ namespace Assets.Scripts.Chemical
 
         Dictionary<Product, float> products;
         float temperature;      // in °C
-        public float pressure { get; private set; }
+        public float pressure { get;  set; }
         public float Density { get {
-                return products.Average(p => p.Key.Density / p.Key.ThermalExpansion / temperature / pressure / p.Key.Compressability * p.Value);
+                return products.Count == 0 ? 0.001f : products.Sum(p => p.Key.ActualDensity(temperature, pressure) * p.Value) / products.Sum(p => p.Value)/1000;    // in kg/m^3
             } }
+
+        public Mixture()
+        {
+            products = new Dictionary<Product, float>();
+            products.Add(Product.Find("air"), 1);
+            pressure = 1;
+        }
 
         public Mixture(Dictionary<Product, float> products)
         {
             this.products = products;
+            pressure = 1;
         }
         public Mixture(Dictionary<string, float> products)
         {
@@ -27,13 +35,20 @@ namespace Assets.Scripts.Chemical
             {
                 this.products.Add(Product.Find(p.Key), p.Value);
             }
+            pressure = 1;
         }
 
         static List<Reaction> AllReactions;
 
+        /// <summary>
+        /// Ratio is newMass / oldMass
+        /// </summary>
+        /// <param name="mix"></param>
+        /// <param name="ratio"></param>
         internal void Add(Mixture mix, float ratio)
         {
-            foreach(var p in products)
+            Dictionary<Product, float> buffer = new Dictionary<Product, float>(products);
+            foreach (var p in buffer)
             {
                 if (mix.products.ContainsKey(p.Key))
                 {
@@ -42,7 +57,10 @@ namespace Assets.Scripts.Chemical
             }
             // normilize
             float s = products.Sum(p => p.Value);
-            foreach(var p in products.Keys) { products[p] *= 1 / s; }
+            foreach (Product p in buffer.Keys)
+            {
+                products[p] *= 1 / s;
+            }
         }
 
         internal void React(float dT)
@@ -163,6 +181,7 @@ namespace Assets.Scripts.Chemical
             public float pMin;
             public string catalyst;
             public float reactionTime; // as halflive in seconds
+            public float reactionEnergy;
         }
         [Serializable]
         struct ProdRatio

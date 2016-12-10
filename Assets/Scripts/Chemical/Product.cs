@@ -16,6 +16,10 @@ namespace Assets.Scripts.Chemical
         public float Compressability;   // dV/dp
         public static Dictionary<string, Product> AllProducts;
 
+        public float ActualDensity(float temp, float press)
+        {
+            return Density / (((ThermalExpansion - 1) * temp) + 1) / ((press * (Compressability - 1)) + 1);
+        }
 
         internal static Product Find(string name)
         {

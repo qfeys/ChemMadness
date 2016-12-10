@@ -25,7 +25,8 @@
             "Tmax": 0.0,
             "pMin": 0.0,
             "catalyst": "",
-            "reactionTime": 20.0
+            "reactionTime": 20.0,
+            "reactionEnergy": 0.0
         }
     ]
 }
