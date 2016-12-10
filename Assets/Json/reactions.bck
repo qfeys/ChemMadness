@@ -1,0 +1,20 @@
+{
+    "list": [
+        {
+            "reagentsNames": ["vcm", "water"],
+            "reagentsRatios": [1.0,100.0],
+            "productNames": [
+                "pvc",
+                "water"
+            ],
+            "productRatios": [
+                1,
+                100
+            ],
+            "Tmin": 0.0,
+            "Tmax": 0.0,
+            "pMin": 0.0,
+            "catalyst": "peroxide"
+        }
+    ]
+}

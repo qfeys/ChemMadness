@@ -1,0 +1,31 @@
+{
+    "list": [
+        {
+            "reagens": [
+                {
+                    "name": "vcm",
+                    "ratio": 1.0
+                },
+                {
+                    "name": "water",
+                    "ratio": 1000.0
+                }
+            ],
+            "product": [
+                {
+                    "name": "pvc",
+                    "ratio": 1.0
+                },
+                {
+                    "name": "water",
+                    "ratio": 1000.0
+                }
+            ],
+            "Tmin": 0.0,
+            "Tmax": 0.0,
+            "pMin": 0.0,
+            "catalyst": "",
+            "reactionTime": 20.0
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "list": [
+        {
+            "Name": "pvc",
+            "Mass": 1.3,
+            "ThermalExpansion": 1.000156,
+            "Compressability": 1.0
+        },
+        {
+            "Name": "vcm",
+            "Mass": 0.9,
+            "ThermalExpansion": 1.000750,
+            "Compressability": 1.0
+        },
+        {
+            "Name": "peroxide",
+            "Mass": 1,
+            "ThermalExpansion": 1.000207,
+            "Compressability": 1.0
+        },
+        {
+            "Name": "water",
+            "Mass": 1,
+            "ThermalExpansion": 1.000207,
+            "Compressability": 1.0
+        }
+    ]
+}
