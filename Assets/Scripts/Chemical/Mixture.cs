@@ -9,7 +9,7 @@ namespace Assets.Scripts.Chemical
 {
     public class Mixture {
 
-        Dictionary<Product, float> products;
+        public Dictionary<Product, float> products { get; private set; }
         public float temperature;      // in °C
         public float pressure { get;  set; }
         public float Density { get {
