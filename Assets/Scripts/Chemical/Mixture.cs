@@ -10,7 +10,7 @@ namespace Assets.Scripts.Chemical
     public class Mixture {
 
         Dictionary<Product, float> products;
-        float temperature;      // in °C
+        public float temperature;      // in °C
         public float pressure { get;  set; }
         public float Density { get {
                 return products.Count == 0 ? 0.001f : products.Sum(p => p.Key.ActualDensity(temperature, pressure) * p.Value) / products.Sum(p => p.Value)*1000;    // in kg/m^3

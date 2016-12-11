@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts.Chemical
 {
-    class Pump : Pipe
+    class Pump : Pipe, Controlled
     {
 
         float pumpPressure;
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Chemical
             {
                 flowSpeed += (Dp / rho / length - 32 * flowSpeed / diameter / diameter) * dT;
             }
-            if (flowSpeed > 500) flowSpeed = 500;
+            if (flowSpeed > 500) flowSpeed = 500;   // To stay sain
             float internalMass = rho * area * length;
             float movedMass = rho * area * flowSpeed * dT;
             float movedVolume = area * flowSpeed * dT;

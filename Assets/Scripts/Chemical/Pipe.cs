@@ -15,6 +15,8 @@ namespace Assets.Scripts.Chemical
         protected float area { get { return diameter * diameter * (float)Math.PI / 4; } }
         protected float length;
         protected float flowSpeed;
+        public float Temperature { get { return mixture.temperature; } }
+        public float InternalMass { get { return mixture.Density * area * length; } }
 
         public Pipe(Vessel entrance, Vessel exit, float length, float diameter)
         {
@@ -36,7 +38,6 @@ namespace Assets.Scripts.Chemical
                 flowSpeed += (Dp / rho / length - 32 * flowSpeed / diameter / diameter) * dT;
             }
             if (flowSpeed > 500) flowSpeed = 500;
-            float internalMass = rho * area * length;
             float movedMass = rho * area * flowSpeed * dT;
             float movedVolume = area * flowSpeed * dT;
             if (flowSpeed > 0)
@@ -44,15 +45,22 @@ namespace Assets.Scripts.Chemical
                 exit.AddMixture(mixture, movedMass);
                 float mass;
                 Mixture newMix = entrance.RemoveMixture(movedVolume, out mass);
-                mixture.Add(newMix, mass / (internalMass - movedMass));
+                mixture.Add(newMix, mass / (InternalMass - movedMass));
             }
             else if (flowSpeed < 0)
             {
                 entrance.AddMixture(mixture, movedMass);
                 float mass;
                 Mixture newMix = exit.RemoveMixture(movedVolume, out mass);
-                mixture.Add(newMix, mass / (internalMass - movedMass));
+                mixture.Add(newMix, mass / (InternalMass - movedMass));
             }
+        }
+
+        internal void AddHeat(float heat)
+        {
+            float heatCap = InternalMass;
+            float dTemp = heat / heatCap;
+            mixture.temperature += dTemp;
         }
     }
 }
