@@ -55,12 +55,16 @@ namespace Assets.Scripts.Chemical
         /// <param name="ratio"></param>
         internal void Add(Mixture mix, float ratio)
         {
-            Dictionary<Product, float> buffer = new Dictionary<Product, float>(products);
+            Dictionary<Product, float> buffer = new Dictionary<Product, float>(mix.products);
             foreach (var p in buffer)
             {
-                if (mix.products.ContainsKey(p.Key))
+                if (products.ContainsKey(p.Key))
                 {
                     products[p.Key] += mix.products[p.Key] * ratio;
+                }
+                else
+                {
+                    products.Add(p.Key, p.Value * ratio);
                 }
             }
             // normilize

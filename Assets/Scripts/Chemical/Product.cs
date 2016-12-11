@@ -18,7 +18,9 @@ namespace Assets.Scripts.Chemical
 
         public float ActualDensity(float temp, float press)
         {
-            return Density / (((ThermalExpansion - 1) * temp) + 1) / ((press * (Compressability - 1)) + 1);
+            //Debug.Log("name: "+Name+" Dens: " + Density + " thermal: " + ThermalExpansion +" press: "+press+ " comprs: " + Compressability + " result:"+
+            //    (Density / (((ThermalExpansion - 1) * temp) + 1) *Mathf.Pow(press, Compressability - 1)));
+            return Density / (((ThermalExpansion - 1) * temp) + 1) * Mathf.Pow(press, Compressability - 1);
         }
 
         internal static Product Find(string name)

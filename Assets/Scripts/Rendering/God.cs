@@ -67,7 +67,8 @@ namespace Assets.Scripts.Rendering
             HClTAnk.AddMixture(new Mixture(Product.Find("HCl")), 10000);
             Sensors.Add(new TankSensor("HCl Tank", HClTAnk));
 
-            Pipe pipe = new Pipe(ethylTank, EDCTank, 20, 0.1f);
+            Pump pipe = new Pump(ethylTank, EDCTank, 10, 0.15f, 100);
+            pipe.Control = 1;
             ActivePipes.Add(pipe);
             Sensors.Add(new PipeSensor("p1", pipe));
         }
