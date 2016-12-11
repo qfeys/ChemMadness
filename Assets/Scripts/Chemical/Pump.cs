@@ -15,18 +15,20 @@ namespace Assets.Scripts.Chemical
             pumpPressure = dP;
         }
 
+        public float Control { get; set; }
 
         public override void Update(float dT)
         {
-            float Dp = (entrance.Pressure - exit.Pressure) * 10000 + pumpPressure; // in Pa
+            float Dp = (entrance.Pressure - exit.Pressure) * 10000 + pumpPressure * Control; // in Pa
             float rho = mixture.Density;
+            float dim = diameter * Control;
             if (diameter * diameter / 32 < 2 * dT)    // fast system, inmediatly go to steady state
             {
-                flowSpeed = Dp * diameter * diameter / (32 * rho * length);
+                flowSpeed = Dp * dim * dim / (32 * rho * length);
             }
             else
             {
-                flowSpeed += (Dp / rho / length - 32 * flowSpeed / diameter / diameter) * dT;
+                flowSpeed += (Dp / rho / length - 32 * flowSpeed / dim / dim) * dT;
             }
             if (flowSpeed > 500) flowSpeed = 500;   // To stay sain
             float internalMass = rho * area * length;

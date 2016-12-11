@@ -7,5 +7,6 @@ namespace Assets.Scripts.Chemical
 {
     interface Controlled
     {
+        float Control { get; set; }
     }
 }
