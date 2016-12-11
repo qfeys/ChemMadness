@@ -5,27 +5,20 @@ using System.Text;
 
 namespace Assets.Scripts.Chemical
 {
-    class Pipe
+    class Pump : Pipe
     {
-        protected Mixture mixture;
 
-        protected Vessel entrance;
-        protected Vessel exit;
-        protected float diameter;
-        protected float area { get { return diameter * diameter * (float)Math.PI / 4; } }
-        protected float length;
-        protected float flowSpeed;
+        float pumpPressure;
 
-        public Pipe(Vessel entrance, Vessel exit, float length, float diameter)
+        public Pump(Vessel entrance, Vessel exit, float length, float diameter, float dP) : base(entrance, exit, length, diameter)
         {
-            this.entrance = entrance; this.exit = exit; this.length = length; this.diameter = diameter;
-            flowSpeed = 0;
-            mixture = new Mixture();
+            pumpPressure = dP;
         }
 
-        public virtual void Update(float dT)
+
+        public override void Update(float dT)
         {
-            float Dp = (entrance.Pressure - exit.Pressure) * 10000; // in Pa
+            float Dp = (entrance.Pressure - exit.Pressure) * 10000 + pumpPressure; // in Pa
             float rho = mixture.Density;
             if (diameter * diameter / 32 < 2 * dT)    // fast system, inmediatly go to steady state
             {
