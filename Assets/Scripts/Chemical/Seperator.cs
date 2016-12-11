@@ -66,6 +66,7 @@ namespace Assets.Scripts.Chemical
             public float mass { get; set; }
             Seperator parent;
             public float Pressure { get { return parent.Pressure; } }
+            public float Temperature { get { return mixture.temperature; } }
 
             public subVessel()
             {

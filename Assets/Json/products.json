@@ -8,20 +8,26 @@
         },
         {
             "Name": "vcm",
-            "Density": 0.9,
-            "ThermalExpansion": 1.000750,
+            "Density": 0.00149,
+            "ThermalExpansion": 1.01,
             "Compressability": 2
         },
         {
             "Name": "water",
             "Density": 1.0,
             "ThermalExpansion": 1.000207,
-            "Compressability": 1.0
+            "Compressability": 1.00000001
+        },
+        {
+            "Name": "ethylene",
+            "Density": 1.178,
+            "ThermalExpansion": 1.000207,
+            "Compressability": 1.00000001
         },
         {
             "Name": "air",
             "Density": 0.001,
-            "ThermalExpansion": 1.1,
+            "ThermalExpansion": 1.01,
             "Compressability": 2
         },
         {
@@ -29,6 +35,12 @@
             "Density": 0.9,
             "ThermalExpansion": 1.000450,
             "Compressability": 1.000000001
+        },
+        {
+            "Name": "HCl",
+            "Density": 0.00149,
+            "ThermalExpansion": 1.01,
+            "Compressability": 2
         }
     ]
 }

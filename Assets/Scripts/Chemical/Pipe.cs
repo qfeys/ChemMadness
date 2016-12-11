@@ -11,12 +11,13 @@ namespace Assets.Scripts.Chemical
 
         protected Vessel entrance;
         protected Vessel exit;
-        protected float diameter;
-        protected float area { get { return diameter * diameter * (float)Math.PI / 4; } }
-        protected float length;
-        protected float flowSpeed;
+        public float diameter { get; protected set; }
+        public float area { get { return diameter * diameter * (float)Math.PI / 4; } }
+        public float length { get; protected set; }
+        public float flowSpeed { get; protected set; }
         public float Temperature { get { return mixture.temperature; } }
         public float InternalMass { get { return mixture.Density * area * length; } }
+        public float MassFlow { get { return mixture.Density * area * flowSpeed; } }
 
         public Pipe(Vessel entrance, Vessel exit, float length, float diameter)
         {

@@ -12,6 +12,7 @@ namespace Assets.Scripts.Chemical
         Mixture mixture;
         public float mass { get; set; }    // The mass of product in the vessel
         public float Pressure { get { return mixture != null ? mixture.pressure : 0; } }
+        public float Temperature { get { return mixture.temperature; } }
         float filled { get { return mass / mixture.Density; } } // between 0 and 1
 
         public ReactionVessel(float Volume, float pressureLimit)

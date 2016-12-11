@@ -19,8 +19,9 @@ namespace Assets.Scripts.Rendering
         public List<Tuple<string,string>> Data()
         {
             List<Tuple<string, string>> ret = new List<Tuple<string, string>>();
-            ret.Add(new Tuple<string, string>("Pressure", tank.Pressure.ToString()+ " atm"));
             ret.Add(new Tuple<string, string>("Content", tank.mass.ToString() + " kg"));
+            ret.Add(new Tuple<string, string>("Pressure", tank.Pressure.ToString() + " atm"));
+            ret.Add(new Tuple<string, string>("Temperature", tank.Temperature + " °C"));
             return ret;
         }
     }

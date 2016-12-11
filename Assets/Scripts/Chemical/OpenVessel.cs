@@ -13,6 +13,7 @@ namespace Assets.Scripts.Chemical
 
 
         public float Pressure { get { return 1; } }
+        public float Temperature { get { return mixture.temperature; } }
 
         public OpenVessel(float Volume)
         {

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 using Assets.Scripts.Chemical;
 
@@ -7,10 +8,17 @@ namespace Assets.Scripts.Rendering
 
     public class God : MonoBehaviour
     {
+        public static God TheOne;
         List<Vessel> ActiveVessels;
         List<Pipe> ActivePipes;
-        List<Sensor> Sensors;
-        // Use this for initialization
+        internal List<Sensor> Sensors;
+
+        public void Awake()
+        {
+            if (TheOne != null) throw new Exception("God already instantiated!");
+            TheOne = this;
+        }
+
         void Start()
         {
             //Chemical.Product.TestSave();
@@ -20,6 +28,7 @@ namespace Assets.Scripts.Rendering
 
             ActiveVessels = new List<Vessel>();
             ActivePipes = new List<Pipe>();
+            Sensors = new List<Sensor>();
             Generate();
             /*
             ReactionVessel rvw = new ReactionVessel(10, 200);

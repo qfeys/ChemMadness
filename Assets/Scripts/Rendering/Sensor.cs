@@ -10,6 +10,6 @@ namespace Assets.Scripts.Rendering
     {
         string name { get; }
 
-        List<Tuple<string, string>> Data()
+        List<Tuple<string, string>> Data();
     }
 }
