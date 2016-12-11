@@ -19,11 +19,11 @@ namespace Assets.Scripts.Rendering
         public List<Tuple<string, string>> Data()
         {
             List<Tuple<string, string>> ret = new List<Tuple<string, string>>();
-            ret.Add(new Tuple<string, string>("Flow Speed", pipe.flowSpeed.ToString() + " m/s"));
+            ret.Add(new Tuple<string, string>("Flow Speed", pipe.flowSpeed.ToString("0.0000") + " m/s"));
             ret.Add(new Tuple<string, string>("Mass Flow", pipe.MassFlow.ToString() + " kg/s"));
-            ret.Add(new Tuple<string, string>("Temperature", pipe.Temperature + " kg/s"));
-            ret.Add(new Tuple<string, string>("Lngth", pipe.length.ToString() + " m"));
-            ret.Add(new Tuple<string, string>("Diameter", (pipe.diameter/1000).ToString() + " mm"));
+            ret.Add(new Tuple<string, string>("Temperature", pipe.Temperature + " °C"));
+            ret.Add(new Tuple<string, string>("Length", pipe.length.ToString() + " m"));
+            ret.Add(new Tuple<string, string>("Diameter", (pipe.diameter*1000).ToString() + " mm"));
             return ret;
         }
     }

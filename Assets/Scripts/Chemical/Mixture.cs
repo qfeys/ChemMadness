@@ -20,7 +20,7 @@ namespace Assets.Scripts.Chemical
         {
             products = new Dictionary<Product, float>();
             products.Add(Product.Find("air"), 1);
-            pressure = 1;
+            pressure = 0.9f;
         }
 
         public Mixture(Product prod)

@@ -66,6 +66,10 @@ namespace Assets.Scripts.Rendering
             ReactionVessel HClTAnk = new ReactionVessel(10, 100);
             HClTAnk.AddMixture(new Mixture(Product.Find("HCl")), 10000);
             Sensors.Add(new TankSensor("HCl Tank", HClTAnk));
+
+            Pipe pipe = new Pipe(ethylTank, EDCTank, 20, 0.1f);
+            ActivePipes.Add(pipe);
+            Sensors.Add(new PipeSensor("p1", pipe));
         }
     }
 }
