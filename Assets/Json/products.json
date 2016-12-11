@@ -10,7 +10,7 @@
             "Name": "vcm",
             "Density": 0.9,
             "ThermalExpansion": 1.000750,
-            "Compressability": 1.0
+            "Compressability": 2
         },
         {
             "Name": "water",
@@ -22,7 +22,7 @@
             "Name": "air",
             "Density": 0.001,
             "ThermalExpansion": 1.1,
-            "Compressability": 1.1
+            "Compressability": 2
         },
         {
             "Name": "pp",

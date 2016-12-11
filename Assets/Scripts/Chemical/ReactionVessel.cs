@@ -10,13 +10,14 @@ namespace Assets.Scripts.Chemical
         float Volume;
         float pressureLimit;
         Mixture mixture;
-        float mass;     // The mass of product in the vessel
+        public float mass { get; set; }    // The mass of product in the vessel
         public float Pressure { get { return mixture != null ? mixture.pressure : 0; } }
         float filled { get { return mass / mixture.Density; } } // between 0 and 1
 
         public ReactionVessel(float Volume, float pressureLimit)
         {
             this.Volume = Volume; this.pressureLimit = pressureLimit;
+            mixture = new Mixture();
         }
 
         public void AddMixture(Mixture mix, float mass)

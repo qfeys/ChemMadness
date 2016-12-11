@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts.Chemical
 {
-    class Seperator
+    class Seperator: Controlled
     {
         float Volume;
         Product primeSeperation;
@@ -13,6 +13,13 @@ namespace Assets.Scripts.Chemical
         public subVessel main;
         public subVessel primeOut;
         public subVessel restOut;
+
+        public float Control { get; set; }
+
+        public Seperator(float Volume, Product primeSeperation, float seperationSpeed)
+        {
+            this.Volume = Volume; this.primeSeperation = primeSeperation; this.seperationSpeed = seperationSpeed;
+        }
 
         public float Pressure
         {
@@ -37,7 +44,7 @@ namespace Assets.Scripts.Chemical
             float maxMass = main.mixture.Density * Volume;
             if (main.mixture.products.ContainsKey(primeSeperation))
             {
-                float massRemoved = maxMass / seperationSpeed * dT;
+                float massRemoved = maxMass / seperationSpeed * dT * Control;
                 float massSeperated = massRemoved * main.mixture.products[primeSeperation];
                 primeOut.AddMixture(new Mixture(new Dictionary<Product, float>() { { primeSeperation, 1.0f } }),massSeperated);
                 var restProducts = new Dictionary<Product,float>( main.mixture.products);
@@ -56,7 +63,7 @@ namespace Assets.Scripts.Chemical
         public class subVessel : Vessel
         {
             public Mixture mixture;
-            public float mass;
+            public float mass { get; set; }
             Seperator parent;
             public float Pressure { get { return parent.Pressure; } }
 

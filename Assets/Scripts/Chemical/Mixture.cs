@@ -23,6 +23,14 @@ namespace Assets.Scripts.Chemical
             pressure = 1;
         }
 
+        public Mixture(Product prod)
+        {
+
+            products = new Dictionary<Product, float>();
+            products.Add(prod, 1);
+            pressure = 1;
+        }
+
         public Mixture(Dictionary<Product, float> products)
         {
             this.products = products;

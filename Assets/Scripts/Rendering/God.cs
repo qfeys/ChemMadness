@@ -9,6 +9,7 @@ namespace Assets.Scripts.Rendering
     {
         List<Vessel> ActiveVessels;
         List<Pipe> ActivePipes;
+        List<Sensor> Sensors;
         // Use this for initialization
         void Start()
         {
@@ -19,7 +20,8 @@ namespace Assets.Scripts.Rendering
 
             ActiveVessels = new List<Vessel>();
             ActivePipes = new List<Pipe>();
-
+            Generate();
+            /*
             ReactionVessel rvw = new ReactionVessel(10, 200);
             rvw.AddMixture(new Mixture(new Dictionary<string, float>() { { "water", 1f } }), 12000);
             ActiveVessels.Add(rvw);
@@ -33,6 +35,7 @@ namespace Assets.Scripts.Rendering
             ActiveVessels.Add(rv);
             ActivePipes.Add(new Pipe(rvw, rv, 5, 0.2f));
             ActivePipes.Add(new Pipe(rvv, rv, 5, 0.1f));
+            */
         }
 
         // Update is called once per frame
@@ -40,6 +43,20 @@ namespace Assets.Scripts.Rendering
         {
             ActivePipes.ForEach(p => p.Update(Time.deltaTime));
             ActiveVessels.ForEach(rv => rv.Update(Time.deltaTime));
+        }
+
+        void Generate()
+        {
+            OpenVessel ethylTank = new OpenVessel(100);
+            ethylTank.AddMixture(new Mixture(Product.Find("ethylene")), 80000);
+            Sensors.Add(new TankSensor("Ethylene Tank", ethylTank));
+
+            ReactionVessel EDCTank = new ReactionVessel(1, 20);
+            Sensors.Add(new TankSensor("EDC Tank", EDCTank));
+
+            ReactionVessel HClTAnk = new ReactionVessel(10, 100);
+            HClTAnk.AddMixture(new Mixture(Product.Find("HCl")), 10000);
+            Sensors.Add(new TankSensor("HCl Tank", HClTAnk));
         }
     }
 }

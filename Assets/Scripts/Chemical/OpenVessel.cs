@@ -7,12 +7,17 @@ namespace Assets.Scripts.Chemical
 {
     class OpenVessel : Vessel
     {
-        float mass;
+        public float mass { get; set; }
         float Volume;
         Mixture mixture;
 
 
         public float Pressure { get { return 1; } }
+
+        public OpenVessel(float Volume)
+        {
+            this.Volume = Volume;
+        }
 
         public void AddMixture(Mixture mix, float mass)
         {
