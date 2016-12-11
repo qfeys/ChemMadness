@@ -13,12 +13,6 @@
             "Compressability": 1.0
         },
         {
-            "Name": "peroxide",
-            "Density": 1.0,
-            "ThermalExpansion": 1.000207,
-            "Compressability": 1.0
-        },
-        {
             "Name": "water",
             "Density": 1.0,
             "ThermalExpansion": 1.000207,
@@ -29,6 +23,12 @@
             "Density": 0.001,
             "ThermalExpansion": 1.1,
             "Compressability": 1.1
+        },
+        {
+            "Name": "pp",
+            "Density": 0.9,
+            "ThermalExpansion": 1.000450,
+            "Compressability": 1.000000001
         }
     ]
 }

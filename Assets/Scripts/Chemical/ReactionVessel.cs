@@ -32,8 +32,9 @@ namespace Assets.Scripts.Chemical
             this.mass += mass;
         }
 
-        public Mixture RemoveMixture(float mass)
+        public Mixture RemoveMixture(float volume, out float mass)
         {
+            mass = volume * mixture.Density;
             this.mass -= mass;
             return mixture;
         }
@@ -52,6 +53,7 @@ namespace Assets.Scripts.Chemical
                 RecalculatePressure();
                 mixture.React(dT);
             }
+            UnityEngine.Debug.Log("-> " + mass+" - "+Pressure);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Assets.Scripts.Chemical
     {
         float Pressure { get; }    // In atm
         void AddMixture(Mixture mix, float mass);
-        Mixture RemoveMixture(float mass);
+        Mixture RemoveMixture(float volume, out float mass);
+        void Update(float dT);
     }
 }

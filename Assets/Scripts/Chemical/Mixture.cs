@@ -13,7 +13,7 @@ namespace Assets.Scripts.Chemical
         float temperature;      // in °C
         public float pressure { get;  set; }
         public float Density { get {
-                return products.Count == 0 ? 0.001f : products.Sum(p => p.Key.ActualDensity(temperature, pressure) * p.Value) / products.Sum(p => p.Value)/1000;    // in kg/m^3
+                return products.Count == 0 ? 0.001f : products.Sum(p => p.Key.ActualDensity(temperature, pressure) * p.Value) / products.Sum(p => p.Value)*1000;    // in kg/m^3
             } }
 
         public Mixture()
@@ -65,6 +65,8 @@ namespace Assets.Scripts.Chemical
 
         internal void React(float dT)
         {
+            if (products.Count > 1)
+                Debug.Log("Reacting?");
             foreach (Reaction reaction in AllReactions)
             {
                 if(reaction.reagens.All(n => products.Any(p => p.Key.Name.Equals(n.name)))             // all reagents are present

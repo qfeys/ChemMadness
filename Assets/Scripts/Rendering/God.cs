@@ -7,7 +7,7 @@ namespace Assets.Scripts.Rendering
 
     public class God : MonoBehaviour
     {
-        List<ReactionVessel> ActiveVessels;
+        List<Vessel> ActiveVessels;
         List<Pipe> ActivePipes;
         // Use this for initialization
         void Start()
@@ -17,17 +17,18 @@ namespace Assets.Scripts.Rendering
             // Chemical.Mixture.TestSave();
             Chemical.Mixture.LoadReactions();
 
-            ActiveVessels = new List<ReactionVessel>();
+            ActiveVessels = new List<Vessel>();
             ActivePipes = new List<Pipe>();
 
             ReactionVessel rvw = new ReactionVessel(10, 200);
-            rvw.AddMixture(new Mixture(new Dictionary<string, float>() { { "water", 1f } }), 10000);
+            rvw.AddMixture(new Mixture(new Dictionary<string, float>() { { "water", 1f } }), 12000);
             ActiveVessels.Add(rvw);
             ReactionVessel rvv = new ReactionVessel(.1f, 200);
-            rvv.AddMixture(new Mixture(new Dictionary<string, float>() { { "vcm", 1f } }), 100);
+            rvv.AddMixture(new Mixture(new Dictionary<string, float>() { { "vcm", 1f } }), 200);
             ActiveVessels.Add(rvv);
 
             ReactionVessel rv = new ReactionVessel(5, 200);
+            rv.AddMixture(new Mixture(new Dictionary<string, float>() { { "air", 1f } }), 200);
             //rv.AddMixture(new Mixture(new Dictionary<string, float>() { { "water", 0.998f }, { "vcm", 0.002f } }), 4000);
             ActiveVessels.Add(rv);
             ActivePipes.Add(new Pipe(rvw, rv, 5, 0.2f));

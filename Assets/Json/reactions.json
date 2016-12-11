@@ -27,6 +27,182 @@
             "catalyst": "",
             "reactionTime": 20.0,
             "reactionEnergy": 0.0
+        },
+        {
+            "reagens": [
+                {
+                    "name": "Air",
+                    "ratio": 100.0
+                }
+            ],
+            "product": [
+                {
+                    "name": "Nitrogen",
+                    "ratio": 78.09
+                },
+                {
+                    "name": "Oxygen",
+                    "ratio": 20.95
+                },
+                {
+                    "name": "Argon",
+                    "ratio": 0.93
+                },
+                {
+                    "name": "Carbondioxide",
+                    "ratio": 0.03
+                }
+            ],
+            "Tmin": -196.0,
+            "Tmax": -183.0,
+            "pMin": 0.0,
+            "catalyst": "",
+            "reactionTime": 20.0,
+            "reactionEnergy": 0.0
+        },
+        {
+            "reagens": [
+                {
+                    "name": "RawNaturalGas",
+                    "ratio": 100.0
+                }
+            ],
+            "product": [
+                {
+                    "name": "Methane",
+                    "ratio": 35.9
+                },
+                {
+                    "name": "Ethane",
+                    "ratio": 24.5
+                },
+                {
+                    "name": "Propane",
+                    "ratio": 18.3
+                },
+                {
+                    "name": "Butane",
+                    "ratio": 15.8
+                },
+                {
+                    "name": "RawOil",
+                    "ratio": 4.0
+                },
+                {
+                    "name": "Pentane",
+                    "ratio": 1.5
+                }
+            ],
+            "Tmin": 20.0,
+            "Tmax": 70.0,
+            "pMin": 0.0,
+            "catalyst": "",
+            "reactionTime": 20.0,
+            "reactionEnergy": 0.0
+        },
+        {
+            "reagens": [
+                {
+                    "name": "CrudeOil",
+                    "ratio": 100.0
+                }
+            ],
+            "product": [
+                {
+                    "name": "Naphtha",
+                    "ratio": 38.7
+                },
+                {
+                    "name": "Benzene",
+                    "ratio": 22.1
+                },
+                {
+                    "name": "Toluene",
+                    "ratio": 19.3
+                },
+                {
+                    "name": "Xylene",
+                    "ratio": 16.4
+                },
+                {
+                    "name": "RawNaturalGas",
+                    "ratio": 3.5
+                }
+            ],
+            "Tmin": -196.0,
+            "Tmax": -183.0,
+            "pMin": 0.0,
+            "catalyst": "",
+            "reactionTime": 20.0,
+            "reactionEnergy": 0.0
+        },
+        {
+            "reagens": [
+                {
+                    "name": "Ethylene",
+                    "ratio": 100.0
+                }
+            ],
+            "product": [
+                {
+                    "name": "HDPE",
+                    "ratio": 100.0
+                }
+            ],
+            "Tmin": 70.0,
+            "Tmax": 300.0,
+            "pMin": 20.0,
+            "catalyst": "Titanium(III)chloride",
+            "reactionTime": 20.0,
+            "reactionEnergy": 200.0
+        },
+        {
+            "reagens": [
+                {
+                    "name": "Ethylene",
+                    "ratio": 100.0
+                }
+            ],
+            "product": [
+                {
+                    "name": "LDPE",
+                    "ratio": 100.0
+                }
+            ],
+            "Tmin": 80.0,
+            "Tmax": 300,
+            "pMin": 150.0,
+            "catalyst": "Titanium(III)chloride",
+            "reactionTime": 20.0,
+            "reactionEnergy": 200.0
+        },
+        {
+            "reagens": [
+                {
+                    "name": "Ethane",
+                    "ratio": 55.0
+                },
+                {
+                    "name": "Propane",
+                    "ratio": 45.0
+                }
+            ],
+            "product": [
+                {
+                    "name": "Ethylene",
+                    "ratio": 60.0
+                },
+                {
+                    "name": "Propene",
+                    "ratio": 40.0
+                }
+            ],
+            "Tmin": 0.0,
+            "Tmax": 80,
+            "pMin": 0.0,
+            "catalyst": "",
+            "reactionTime": 20.0,
+            "reactionEnergy": 0.0
         }
     ]
 }
